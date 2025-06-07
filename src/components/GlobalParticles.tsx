@@ -2,38 +2,70 @@
 
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
+import { useMemo, useEffect, useState } from "react";
 
 export const GlobalParticles = () => {
   const { theme } = useTheme();
-  
+
+  // Estado para saber si estamos en cliente y ancho de ventana
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    // Check inicial y listener resize
+    const checkWidth = () => setIsDesktop(window.innerWidth >= 768);
+    checkWidth();
+
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
+
+  // Memoizar partículas para evitar cambios en cada render
+  const particles = useMemo(() =>
+    [...Array(30)].map(() => ({
+      size: Math.random() * 20 + 10,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      initialX: Math.random() * 100,
+      initialY: Math.random() * 100,
+      destX: Math.random() * 100,
+      destY: Math.random() * 100,
+      duration: Math.random() * 12 + 8,
+      scale: Math.random() * 0.8 + 0.7,
+    })), []
+  );
+
+  if (!isDesktop) return null;
+
   return (
     <>
-      {[...Array(60)].map((_, i) => (
+      {particles.map((p, i) => (
         <motion.div
           key={i}
           className={`absolute rounded-full ${
-            theme === 'dark' ? 'bg-green-500/20' : 'bg-primary/40'
-          } blur-sm`}
+            theme === "dark" ? "bg-green-500/20" : "bg-primary/40"
+          }`}
           initial={{
-            x: Math.random() * 100,
-            y: Math.random() * 100,
+            x: p.initialX,
+            y: p.initialY,
             opacity: 0.6,
-            scale: Math.random() * 0.8 + 0.7
+            scale: p.scale,
           }}
           animate={{
-            x: Math.random() * 100,
-            y: Math.random() * 100,
+            x: p.destX,
+            y: p.destY,
             transition: {
-              duration: Math.random() * 12 + 8,
+              duration: p.duration,
               repeat: Infinity,
-              repeatType: "reverse"
-            }
+              repeatType: "reverse",
+              ease: "easeInOut",
+            },
           }}
           style={{
-            width: Math.random() * 20 + 10,
-            height: Math.random() * 20 + 10,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`
+            width: p.size,
+            height: p.size,
+            left: p.left,
+            top: p.top,
+            filter: "blur(2px)",
           }}
         />
       ))}
