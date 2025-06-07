@@ -1,26 +1,273 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Fuente personalizada y variables de color */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Estilos base del body */
+body {
+  @apply bg-neutral-50 text-neutral-900 m-0 min-h-screen dark:bg-gray-900 dark:text-gray-100;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Animaciones personalizadas */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
 }
+
+/* Componentes personalizados con Tailwind */
+@layer components {
+  /* Colores primarios */
+  .text-primary {
+    @apply text-[#800020] dark:text-[#8B0000];
+  }
+
+  .text-primary-500 {
+    @apply text-[#9A2A3A] dark:text-[#A4161A];
+  }
+    /* Estilos específicos para el formulario de contacto */
+  .recaptcha-container {
+    @apply transform transition-transform duration-300 hover:scale-[1.01];
+  }
+
+  /* Animaciones para los inputs */
+  .form-input {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  /* Efecto para el botón de enviar */
+  .button-primary {
+    @apply relative overflow-hidden;
+  }
+
+  .button-primary::after {
+    @apply content-[''] absolute top-0 left-0 w-full h-full bg-white opacity-0 transition-opacity duration-300;
+  }
+
+  .button-primary:hover::after {
+    @apply opacity-10;
+  }
+@layer components {
+  .hero-image-container {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+  
+  .hero-image-particle {
+    will-change: transform, opacity;
+    mix-blend-mode: screen;
+  }
+  
+  .hero-image-glow {
+    filter: blur(20px);
+    will-change: opacity, box-shadow;
+  }
+}
+
+  /* Botones */
+  .button-primary {
+    @apply inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#800020] to-[#9A2A3A] text-white rounded-lg
+      hover:from-[#A4161A] hover:to-[#8B0000] transition-colors shadow-lg;
+  }
+
+  .button-secondary {
+    @apply flex items-center px-6 py-3 bg-white text-primary border border-primary rounded-lg
+      hover:bg-[#F3D6D9] transition-colors dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-[#5E121B];
+  }
+
+  /* Enlaces (excepto botones) */
+  a:not(.button-primary):not(.button-secondary) {
+    @apply text-primary hover:text-primary-500 font-medium transition-colors;
+  }
+
+  /* Fondo con textura */
+  .bg-bordo-pattern {
+    @apply relative overflow-hidden;
+    background-color: theme('colors.primary.100');
+  }
+.section-container {
+  @apply py-20 px-4 sm:px-6 lg:px-8 bg-white/30 dark:bg-gray-900/30 backdrop-blur-md;
+}
+
+.section-title {
+  @apply text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-sky-400 bg-clip-text text-transparent mb-4;
+}
+.link[rel='icon'] {
+  transition: transform 0.3s ease;
+}
+
+.link[rel='icon']:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.section-subtitle {
+  @apply text-gray-600 dark:text-gray-400 max-w-2xl mx-auto;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1;
+}
+
+.form-input {
+  @apply w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm;
+}
+
+  .bg-bordo-pattern::before {
+    content: '';
+    @apply absolute inset-0 opacity-20;
+    background-image: radial-gradient(theme('colors.primary.500') 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Efecto para tarjetas */
+  .card-hover-effect {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  /* NUEVAS clases para sección proyectos */
+
+.project-details {
+  @apply h-full w-full p-6 overflow-y-auto custom-scrollbar text-gray-900 dark:text-gray-100 bg-transparent rounded-lg;
+}
+
+
+  .project-details-header {
+    @apply flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6;
+  }
+
+  .project-details-header-left {
+    @apply flex flex-col gap-1;
+  }
+
+  .project-title {
+    @apply text-3xl font-bold dark:text-white text-primary;
+  }
+
+  .project-client {
+    @apply text-gray-600 dark:text-gray-300 mt-1;
+  }
+
+  .project-year {
+    @apply text-sm text-gray-500 dark:text-gray-400;
+  }
+
+  .project-description {
+    @apply text-gray-700 dark:text-gray-300 whitespace-pre-line;
+  }
+
+.project-features-list {
+  @apply list-disc pl-5 space-y-2 text-[#5a0010] dark:text-gray-200;
+}
+.projects-container {
+  @apply flex flex-col md:flex-row gap-6 mt-6;
+}
+
+
+
+  .project-feature-item {
+    @apply cursor-pointer transition-transform transition-colors;
+  }
+  .project-feature-item:hover {
+    @apply translate-x-1 text-primary-500;
+  }
+
+  .project-details-content {
+    @apply flex flex-col md:flex-row gap-8 mb-6;
+  }
+
+  .project-description-features {
+    @apply flex-1 flex flex-col gap-6;
+  }
+
+  .project-technologies {
+    @apply flex-1;
+  }
+
+  .technologies-list {
+    @apply flex flex-wrap gap-2 mt-2;
+  }
+
+  .technology-pill {
+    @apply px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full text-sm cursor-pointer transition duration-200 text-primary;
+  }
+  .technology-pill:hover {
+    @apply scale-105 bg-[#F3D6D9] dark:bg-[#5E121B] text-primary-500;
+  }
+
+  .project-gallery {
+    @apply mt-8;
+  }
+
+  .gallery-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  .gallery-item {
+    @apply rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-2 shadow-md cursor-zoom-in relative h-48;
+  }
+
+  .gallery-image-wrapper {
+    @apply relative w-full h-full;
+  }
+
+  .gallery-image {
+    @apply object-cover rounded-lg;
+  }
+
+  .gallery-caption {
+    @apply text-center text-xs text-gray-500 mt-1;
+  }
+
+  .section-title {
+    @apply text-xl font-semibold mb-2 dark:text-white text-primary;
+  }
+
+  .icon-external-link {
+    @apply ml-2 w-5 h-5 inline-block text-primary;
+  }
+}
+
+/* Reset para elementos interactivos */
+button {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50;
+}
+
+/* Scrollbar personalizada */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-black/10 dark:bg-white/10;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-black/20 dark:bg-white/20;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-black/40 dark:bg-white/40;
+}
+

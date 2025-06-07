@@ -1,24 +1,49 @@
 {
-  "name": "mi-portafolios1.0",
-  "version": "0.1.0",
+  "name": "mi-portafolio",
   "private": true,
+  "version": "0.0.0",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.3.3"
+    "@heroicons/react": "^2.2.0",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.8.1",
+    "emailjs-com": "^3.2.0",
+    "framer-motion": "^12.16.0",
+    "lucide-react": "^0.513.0",
+    "next": "^15.3.3",
+    "next-themes": "^0.4.6",
+    "nodemailer": "^7.0.3",
+    "process": "^0.11.10",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-google-recaptcha": "^3.1.0",
+    "react-icons": "^5.5.0",
+    "react-tsparticles": "^2.12.0",
+    "tsparticles": "^2.12.0",
+    "tsparticles-engine": "^2.12.0"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4"
+    "@eslint/js": "^9.25.0",
+    "@types/node": "^22.15.26",
+    "@types/nodemailer": "^6.4.17",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@types/react-google-recaptcha": "^2.1.9",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.4.1",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.30.1"
   }
 }
