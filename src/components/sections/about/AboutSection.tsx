@@ -4,12 +4,21 @@ import { motion } from "framer-motion";
 import { AboutCard } from "./AboutCard";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { Engine } from "tsparticles-engine";
 
 export const AboutSection = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadFull(engine);
+  }, []);
+
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const checkWidth = () => setIsDesktop(window.innerWidth >= 768);
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   return (
@@ -20,60 +29,62 @@ export const AboutSection = () => {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      {/* Fondo de partículas */}
-      <Particles
-        id="about-particles"
-        init={particlesInit}
-        options={{
-          fpsLimit: 60,
-          particles: {
-            number: { 
-              value: 30,
-              density: {
+      {/* Fondo de partículas solo en escritorio */}
+      {isDesktop && (
+        <Particles
+          id="about-particles"
+          init={particlesInit}
+          options={{
+            fpsLimit: 60,
+            particles: {
+              number: {
+                value: 30,
+                density: {
+                  enable: true,
+                  value_area: 800,
+                },
+              },
+              color: {
+                value: "#3B82F6",
+              },
+              opacity: {
+                value: 0.3,
+                random: true,
+              },
+              size: {
+                value: 3,
+                random: true,
+              },
+              move: {
                 enable: true,
-                value_area: 800
-              }
+                speed: 1,
+                direction: "none",
+                random: true,
+                out_mode: "out",
+              },
+              links: {
+                enable: false,
+              },
             },
-            color: { 
-              value: "#3B82F6" 
+            interactivity: {
+              events: {
+                onHover: {
+                  enable: true,
+                  mode: "repulse",
+                },
+              },
+              modes: {
+                repulse: {
+                  distance: 100,
+                  duration: 0.4,
+                },
+              },
             },
-            opacity: { 
-              value: 0.3,
-              random: true
-            },
-            size: { 
-              value: 3,
-              random: true
-            },
-            move: { 
-              enable: true, 
-              speed: 1,
-              direction: "none",
-              random: true,
-              out_mode: "out"
-            },
-            links: {
-              enable: false
-            }
-          },
-          interactivity: { 
-            events: { 
-              onHover: { 
-                enable: true, 
-                mode: "repulse" 
-              } 
-            },
-            modes: {
-              repulse: {
-                distance: 100,
-                duration: 0.4
-              }
-            }
-          },
-          detectRetina: true
-        }}
-        className="absolute inset-0 -z-10"
-      />
+            detectRetina: true,
+          }}
+          className="absolute inset-0 -z-10"
+        />
+      )}
 
       {/* Fondos decorativos */}
       <div className="absolute inset-0 -z-20">
@@ -82,7 +93,7 @@ export const AboutSection = () => {
       </div>
 
       <div className="container mx-auto px-4 relative">
-        <motion.h2 
+        <motion.h2
           className="text-5xl font-bold mb-16 text-center"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
