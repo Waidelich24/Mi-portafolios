@@ -110,7 +110,7 @@ export const ContactForm = ({ onSubmit }: ContactFormProps) => {
         className="mt-6"
       >
         <ReCAPTCHA
-          sitekey="6LftMFgrAAAAAFKCqxZg2HHT-BjSX6_eG1YZf2Ca"
+          sitekey="6LdoLVkrAAAAAKqjvugIJGOjgPzaUSHObZBWHx7h"
           onChange={(token) => setCaptchaToken(token)}
           className="recaptcha-container"
         />
