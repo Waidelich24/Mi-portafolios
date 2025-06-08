@@ -51,6 +51,6 @@ export const projectsData: Project[] = [
       "/images/projects/isipp/1.png",
       "/images/projects/isipp/2.png"
     ],
-    link: "https://isipp1206.edu.ar"
+    link: "https://isippweb.vercel.app"
   }
 ];
