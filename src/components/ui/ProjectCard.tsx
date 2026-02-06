@@ -1,5 +1,5 @@
 import React from 'react';
-import { Project } from '@/types'; // Definiremos tipos después
+import { Project } from '@/types/index'; // Definiremos tipos después
 
 interface Props {
   project: Project;
