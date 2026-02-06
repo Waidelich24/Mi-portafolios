@@ -7,12 +7,14 @@ export const AboutImage = () => {
       className="relative"
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.8 }}
       whileHover={{ y: -10 }}
     >
       <motion.div
         className="overflow-hidden rounded-2xl shadow-2xl border-4 border-white dark:border-gray-800"
         whileInView={{ y: [0, -15, 0] }}
+        viewport={{ once: true }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       >
         <img
@@ -27,6 +29,7 @@ export const AboutImage = () => {
         className="absolute -bottom-5 -right-5 bg-gradient-to-r from-primary-500 to-secondary-600 text-white px-4 py-2 rounded-lg shadow-lg font-medium"
         initial={{ scale: 0, rotate: -20 }}
         whileInView={{ scale: 1, rotate: 0 }}
+        viewport={{ once: true }}
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
         whileHover={{ scale: 1.1, rotate: 5 }}
       >

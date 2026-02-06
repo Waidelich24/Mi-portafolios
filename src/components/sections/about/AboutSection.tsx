@@ -27,6 +27,7 @@ export const AboutSection = () => {
       className="py-24 relative overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.8 }}
     >
       {/* Fondo de partículas solo en escritorio */}
@@ -97,7 +98,8 @@ export const AboutSection = () => {
           className="text-5xl font-bold mb-16 text-center"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
           <span className="bg-gradient-to-r from-primary-400 to-secondary-600 bg-clip-text text-transparent">
             Sobre Mí

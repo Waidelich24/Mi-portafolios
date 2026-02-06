@@ -21,6 +21,7 @@ export const AboutTechPills = () => {
           className="px-4 py-2 rounded-full text-sm font-medium text-white bg-gradient-to-r from-primary-500 to-secondary-600 shadow-sm"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ delay: index * 0.08, duration: 0.3 }}
           whileHover={{ scale: 1.05 }}
         >

@@ -13,6 +13,7 @@ export const AboutTimeline = () => {
       className="backdrop-blur-sm bg-white/50 dark:bg-gray-800/50 rounded-2xl shadow-xl p-6 border border-white/20 dark:border-gray-700/50"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.6, delay: 0.6 }}
     >
       <h4 className="text-xl font-bold mb-6 bg-gradient-to-r from-primary-500 to-secondary-400 bg-clip-text text-transparent">
@@ -29,6 +30,7 @@ export const AboutTimeline = () => {
             className="flex gap-4 pl-8 relative"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.3 + i * 0.15 }}
           >
             {/* Punto del timeline */}
