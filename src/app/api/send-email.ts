@@ -1,42 +1,46 @@
-// pages/api/send-email.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
-import nodemailer from 'nodemailer';
+import { NextResponse } from "next/server";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+type ContactPayload = {
+  name?: string;
+  email?: string;
+  message?: string;
+};
+
+export async function POST(request: Request) {
+  const { name, email, message } = (await request.json()) as ContactPayload;
+
+  if (!name || !email || !message) {
+    return NextResponse.json({ error: "Datos incompletos." }, { status: 400 });
   }
 
-  const { name, email, message } = req.body;
+  const serviceId = process.env.EMAILJS_SERVICE_ID;
+  const templateId = process.env.EMAILJS_TEMPLATE_ID;
+  const publicKey = process.env.EMAILJS_PUBLIC_KEY;
 
-  // Configura el transporter de nodemailer
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS,
+  if (!serviceId || !templateId || !publicKey) {
+    return NextResponse.json({ error: "Configuración incompleta." }, { status: 500 });
+  }
+
+  const emailResponse = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
+    body: JSON.stringify({
+      service_id: serviceId,
+      template_id: templateId,
+      user_id: publicKey,
+      template_params: {
+        from_name: name,
+        reply_to: email,
+        message,
+      },
+    }),
   });
 
-  try {
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.GMAIL_USER}>`,
-      to: process.env.GMAIL_USER,
-      subject: `Nuevo mensaje de ${name}`,
-      html: `
-        <p><strong>Nombre:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Mensaje:</strong></p>
-        <p>${message}</p>
-      `,
-    });
-
-    return res.status(200).json({ success: true });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Error sending email' });
+  if (!emailResponse.ok) {
+    return NextResponse.json({ error: "No se pudo enviar el mensaje." }, { status: 500 });
   }
+
+  return NextResponse.json({ success: true });
 }

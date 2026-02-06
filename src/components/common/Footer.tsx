@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { PrimaryButton } from "@/components/ui/buttons/PrimaryButton"; // ajusta la ruta si es distinta
 
@@ -139,9 +140,11 @@ export function Footer() {
     </p>
   </div>
 
-  <img
+  <Image
     src="/Perfilimage-rounded.png"
     alt="Avatar Angel Waidelich"
+    width={96}
+    height={96}
     className="w-24 h-24 rounded-full object-cover shadow-lg mx-auto"
   />
 

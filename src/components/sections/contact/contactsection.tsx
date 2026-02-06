@@ -1,24 +1,27 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { ContactInfo } from "./ContactInfo";
 import { SocialLinks } from "./SocialLinks";
 import { ContactForm } from "./ContactForm";
-import emailjs from "emailjs-com";
 
 const ContactSection = () => {
   const handleSubmit = async (formData: { name: string; email: string; message: string }) => {
-    return emailjs.send(
-      "service_ug53z2m",
-      "template_svwi8li",
-      {
-        from_name: formData.name,
-        reply_to: formData.email,
-        message: formData.message,
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      "dF0CJvls729mF8yR8"
-    );
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al enviar el mensaje.");
+    }
   };
 
   return (

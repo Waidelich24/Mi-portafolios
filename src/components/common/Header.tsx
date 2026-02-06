@@ -5,34 +5,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
-
-function useScrollSpy(ids: string[], offset = 0) {
-  const [activeId, setActiveId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= offset + 100 && rect.bottom > offset + 100) {
-          if (window.location.hash !== `#${id}`) {
-            window.history.replaceState(null, '', `#${id}`);
-          }
-          setActiveId(id);
-          break;
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [ids, offset]);
-
-  return activeId;
-}
+import { useScrollSpy } from '@/hooks/useScrollSpy';
 
 function useSmoothScroll() {
   const scrollTo = (id: string) => {
@@ -67,7 +40,9 @@ export function Header() {
 
   useEffect(() => {
     setMounted(true);
-    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const storedTheme = window.localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = storedTheme ? storedTheme === 'dark' : prefersDark;
     setDarkMode(isDark);
     document.documentElement.classList.toggle('dark', isDark);
 
@@ -79,8 +54,10 @@ export function Header() {
   }, []);
 
   const toggleTheme = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle('dark', !darkMode);
+    const nextMode = !darkMode;
+    setDarkMode(nextMode);
+    document.documentElement.classList.toggle('dark', nextMode);
+    window.localStorage.setItem('theme', nextMode ? 'dark' : 'light');
   };
 
   const toggleMenu = () => setIsOpen(!isOpen);
