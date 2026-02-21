@@ -1,0 +1,159 @@
+/* AboutSection.css */
+
+/* Animaciones para el pipeline */
+@keyframes pipeline-glow {
+  0% {
+    box-shadow: 0 0 0px rgba(239, 68, 68, 0);
+  }
+  20% {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+  }
+  40% {
+    box-shadow: 0 0 0px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(239, 68, 68, 0);
+  }
+}
+
+@keyframes pipeline-brush {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-5px) rotate(-10deg);
+  }
+  50% {
+    transform: translateX(5px) rotate(10deg);
+  }
+  75% {
+    transform: translateX(-2px) rotate(-5deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@keyframes pipeline-gear {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pipeline-rocket {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  20% {
+    transform: translateY(-10px) scale(1.1);
+  }
+  40% {
+    transform: translateY(0) scale(1);
+  }
+  60% {
+    transform: translateX(5px) translateY(-3px);
+  }
+  80% {
+    transform: translateX(-2px) translateY(0);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Hover animations */
+@keyframes hover-glow {
+  0%, 100% {
+    box-shadow: 0 0 0px rgba(239, 68, 68, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+  }
+}
+
+@keyframes hover-brush {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-5deg) scale(1.05);
+  }
+}
+
+@keyframes hover-gear {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes hover-rocket {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Clases de animación */
+.animate-pipeline-glow {
+  animation: pipeline-glow 0.6s ease-out forwards;
+}
+
+.animate-pipeline-brush {
+  animation: pipeline-brush 0.8s ease-in-out forwards;
+}
+
+.animate-pipeline-gear {
+  animation: pipeline-gear 1s ease-out forwards;
+}
+
+.animate-pipeline-rocket {
+  animation: pipeline-rocket 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Hover classes */
+.hover-glow:hover {
+  animation: hover-glow 0.5s ease-in-out infinite;
+}
+
+.hover-brush:hover {
+  animation: hover-brush 0.4s ease-in-out infinite;
+}
+
+.hover-gear:hover {
+  animation: hover-gear 0.6s ease-in-out infinite;
+}
+
+.hover-rocket:hover {
+  animation: hover-rocket 0.5s ease-in-out infinite;
+}
+
+/* Trigger para reiniciar animaciones */
+.animation-trigger-1 .animate-pipeline-glow,
+.animation-trigger-2 .animate-pipeline-glow {
+  animation: pipeline-glow 0.6s ease-out forwards;
+}
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pipeline-glow,
+  .animate-pipeline-brush,
+  .animate-pipeline-gear,
+  .animate-pipeline-rocket,
+  .hover-glow:hover,
+  .hover-brush:hover,
+  .hover-gear:hover,
+  .hover-rocket:hover {
+    animation: none !important;
+  }
+}
