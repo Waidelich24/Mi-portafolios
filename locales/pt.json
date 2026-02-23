@@ -1,0 +1,156 @@
+
+{
+  "meta": {
+    "title": "Meu Portfólio",
+    "description": "Desenvolvedor Fullstack"
+  },
+  "brand": {
+    "name": "MeuPortfólio",
+    "short": "MP",
+    "author": "Angel Waidelich"
+  },
+  "navigation": {
+    "home": "Início",
+    "about": "Sobre mim",
+    "projects": "Projetos",
+    "contact": "Contato"
+  },
+  "actions": {
+    "themeToggle": "Alternar tema",
+    "languageToggle": "Mudar idioma",
+    "downloadCv": "Baixar CV",
+    "visitSite": "Visitar Site",
+    "seeProject": "Ver Projeto",
+    "contactNow": "Entrar em contato",
+    "sendMessage": "Enviar mensagem",
+    "sending": "Enviando..."
+  },
+  "hero": {
+    "role": "Desenvolvedor de Software",
+    "description": "Profissional com 3 anos de experiência em desenvolvimento de software, especializado em aplicações web e desktop. Trabalho com tecnologias como",
+    "stack": "React, Tailwind, Python, C#, Node.js e SQL",
+    "descriptionEnd": "e mantenho uma abordagem versátil e orientada a resultados.",
+    "cta": "Conheça meus projetos",
+    "bulletPoints": [
+      "Experiência em soluções Full Stack",
+      "Conhecimento em desenvolvimento mobile",
+      "Buscando ativamente novas oportunidades"
+    ],
+    "imageAlt": "Angel Waidelich"
+  },
+  "about": {
+    "title": "Sobre Mim",
+    "badge": "Desenvolvedor Full Stack",
+    "headline": "Focado em construir produtos escaláveis",
+    "description": "Especializado em criar soluções digitais inovadoras com React, Node.js e arquiteturas escaláveis. Mais de 3 anos transformando ideias em produtos funcionais com foco em experiência do usuário, desempenho e decisões técnicas sustentáveis.",
+    "profileAlt": "Foto de perfil",
+    "floatingBadge": "3+ anos",
+    "metrics": [
+      { "value": "+3", "label": "anos desenvolvendo" },
+      { "value": "3", "label": "projetos reais implantados" },
+      { "value": "7+", "label": "tecnologias dominadas" }
+    ],
+    "roadmap": {
+      "title": "Minha Evolução Profissional",
+      "items": [
+        {
+          "year": "2023",
+          "focus": "Fundamentos de Programação",
+          "detail": "Início no desenvolvimento com Python, estruturas de dados e raciocínio lógico voltado para resolução de problemas."
+        },
+        {
+          "year": "2024",
+          "focus": "Desenvolvimento de Aplicações",
+          "detail": "Construção de aplicações com C#, bancos de dados SQL e primeiros projetos reais orientados a produto."
+        },
+        {
+          "year": "2025",
+          "focus": "Full Stack & Arquitetura",
+          "detail": "Especialização em React, Node.js, Tailwind e design de arquiteturas modernas e escaláveis."
+        }
+      ]
+    }
+  },
+  "projects": {
+    "title": "Projetos em Destaque",
+    "clientLabel": "Cliente:",
+    "descriptionLabel": "Descrição",
+    "featuresLabel": "Funcionalidades",
+    "technologiesLabel": "Tecnologias",
+    "galleryLabel": "Galeria",
+    "screenshot": "Captura",
+    "imageLoadError": "Erro ao carregar",
+    "imageLoadErrorDetailed": "Erro ao carregar a imagem",
+    "items": [
+      {
+        "id": "1",
+        "title": "Sistema de Gestão Bibliotecária",
+        "client": "Biblioteca Pública de Montecarlo Misiones",
+        "year": 2023,
+        "description": "Sistema integral para a gestão de empréstimos, inventário e usuários da biblioteca municipal. Permite o controle completo do fluxo de livros, registro de empréstimos e geração de relatórios estatísticos.",
+        "features": [
+          "CRUD completo de livros e usuários",
+          "Sistema de empréstimos com datas de vencimento",
+          "Cálculo automático de multas por atraso",
+          "Geração de relatórios em PDF",
+          "Busca avançada com múltiplos filtros"
+        ],
+        "technologies": ["Python", "SQL (SQLite)", "Tkinter", "ReportLab (PDF)"],
+        "thumbnail": "/images/projects/biblioteca/thumb.jpg",
+        "images": ["/images/projects/biblioteca/1.png", "/images/projects/biblioteca/2.png"]
+      },
+      {
+        "id": "2",
+        "title": "Site Institucional",
+        "client": "ISIPP 1206",
+        "year": 2024,
+        "description": "Plataforma informativa moderna para o instituto educacional, mostrando sua oferta acadêmica, instalações e processo de admissão. Projetada para ser acessível e com excelente performance em dispositivos móveis.",
+        "features": [
+          "Apresentação interativa de cursos",
+          "Galeria de instalações",
+          "Formulário de contato integrado",
+          "Blog de novidades",
+          "Design responsivo com foco em mobile"
+        ],
+        "technologies": ["React", "TypeScript", "Node.js", "Tailwind CSS"],
+        "thumbnail": "/images/projects/isipp/thumb.jpg",
+        "images": ["/images/projects/isipp/1.png", "/images/projects/isipp/2.png"],
+        "link": "https://isippweb.vercel.app"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contato",
+    "subtitle": "Você tem um projeto em mente ou quer trabalhar comigo? Envie uma mensagem e eu responderei o mais rápido possível.",
+    "infoTitle": "Informações de contato",
+    "socialTitle": "Redes sociais",
+    "fields": {
+      "name": "Nome",
+      "namePlaceholder": "Seu nome completo",
+      "email": "Email",
+      "emailPlaceholder": "voce@email.com",
+      "message": "Mensagem",
+      "messagePlaceholder": "Conte-me sobre seu projeto..."
+    },
+    "status": {
+      "captcha": "⚠️ Por favor verifique que você não é um robô.",
+      "success": "✓ Mensagem enviada com sucesso!",
+      "error": "✗ Erro ao enviar. Tente novamente."
+    },
+    "items": {
+      "email": "Email",
+      "location": "Localização",
+      "phone": "Telefone",
+      "locationValue": "Montecarlo, Misiones, Argentina"
+    }
+  },
+  "footer": {
+    "description": "Desenvolvedor Full Stack apaixonado por criar soluções digitais inovadoras.",
+    "navTitle": "Navegação",
+    "contactTitle": "Contato",
+    "projectTitle": "Tem um projeto?",
+    "projectDescription": "Vamos conversar sobre como posso ajudar a torná-lo realidade.",
+    "avatarAlt": "Avatar Angel Waidelich",
+    "copyright": "Todos os direitos reservados."
+  }
+}

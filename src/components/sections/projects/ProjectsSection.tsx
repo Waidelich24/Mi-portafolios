@@ -5,16 +5,18 @@ import { AnimatePresence } from "framer-motion";
 import ProjectList from "./ProjectList";
 import ProjectDetails from "./ProjectDetails";
 import ImageModal from "./ImageModal";
-import { projectsData } from "@/data/projectsData";
+import { Project } from "@/data/projectsData";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<number>(0);
   const [expandedImageIndex, setExpandedImageIndex] = useState<number | null>(null);
   const [imageLoadError, setImageLoadError] = useState<string | null>(null);
+  const { tRaw } = useTranslation();
 
+  const projects = tRaw<Project[]>('projects.items');
   const prevExpandedIndex = useRef<number | null>(null);
 
-  // Bloquea scroll al abrir imagen, y restaura al cerrar
   useEffect(() => {
     if (expandedImageIndex !== null) {
       document.body.style.overflow = "hidden";
@@ -29,7 +31,6 @@ export default function ProjectsSection() {
     }
   }, [expandedImageIndex]);
 
-  // 🔁 Vuelve a la sección de proyectos al cerrar el modal
   useEffect(() => {
     if (prevExpandedIndex.current !== null && expandedImageIndex === null) {
       const section = document.getElementById("proyectos");
@@ -40,28 +41,9 @@ export default function ProjectsSection() {
     prevExpandedIndex.current = expandedImageIndex;
   }, [expandedImageIndex]);
 
-  const currentImages = projectsData[selectedProject].images;
+  if (!projects.length) return null;
 
-  function openImageAtIndex(index: number) {
-    setExpandedImageIndex(index);
-    setImageLoadError(null);
-  }
-
-  function closeModal() {
-    setExpandedImageIndex(null);
-  }
-
-  function prevImage() {
-    if (expandedImageIndex !== null && expandedImageIndex > 0) {
-      setExpandedImageIndex(expandedImageIndex - 1);
-    }
-  }
-
-  function nextImage() {
-    if (expandedImageIndex !== null && expandedImageIndex < currentImages.length - 1) {
-      setExpandedImageIndex(expandedImageIndex + 1);
-    }
-  }
+  const currentImages = projects[selectedProject].images;
 
   return (
     <section id="proyectos" className="projects-section">
@@ -73,34 +55,15 @@ export default function ProjectsSection() {
       )}
 
       <div className="projects-container">
-        <ProjectList
-          projects={projectsData}
-          selectedProject={selectedProject}
-          setSelectedProject={setSelectedProject}
-          openImageAtIndex={openImageAtIndex}
-          setImageLoadError={setImageLoadError}
-        />
+        <ProjectList projects={projects} selectedProject={selectedProject} setSelectedProject={setSelectedProject} openImageAtIndex={setExpandedImageIndex} setImageLoadError={setImageLoadError} />
 
         <AnimatePresence mode="wait">
-          <ProjectDetails
-            key={selectedProject}
-            project={projectsData[selectedProject]}
-            openImageAtIndex={openImageAtIndex}
-            setImageLoadError={setImageLoadError}
-          />
+          <ProjectDetails key={selectedProject} project={projects[selectedProject]} openImageAtIndex={setExpandedImageIndex} setImageLoadError={setImageLoadError} />
         </AnimatePresence>
       </div>
 
       <AnimatePresence>
-        {expandedImageIndex !== null && (
-          <ImageModal
-            images={currentImages}
-            currentIndex={expandedImageIndex}
-            onClose={closeModal}
-            onPrev={prevImage}
-            onNext={nextImage}
-          />
-        )}
+        {expandedImageIndex !== null && <ImageModal images={currentImages} currentIndex={expandedImageIndex} onClose={() => setExpandedImageIndex(null)} onPrev={() => setExpandedImageIndex((prev) => (prev && prev > 0 ? prev - 1 : prev))} onNext={() => setExpandedImageIndex((prev) => (prev !== null && prev < currentImages.length - 1 ? prev + 1 : prev))} />}
       </AnimatePresence>
     </section>
   );

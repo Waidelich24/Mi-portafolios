@@ -1,4 +1,3 @@
-// components/Header.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -6,6 +5,8 @@ import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
+import { useTranslation } from '@/hooks/useTranslation';
+import { LanguageToggle } from '@/components/LanguageToggle';
 
 function useSmoothScroll() {
   const scrollTo = (id: string) => {
@@ -13,7 +14,7 @@ function useSmoothScroll() {
     if (element) {
       window.scrollTo({
         top: element.offsetTop - 80,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   };
@@ -26,15 +27,16 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [mounted, setMounted] = useState(false);
-  
+  const { t } = useTranslation();
+
   const navItems = [
-    { id: 'inicio', label: 'Inicio' },
-    { id: 'sobre-mi', label: 'Sobre mí' },
-    { id: 'proyectos', label: 'Proyectos' },
-    { id: 'contacto', label: 'Contacto' },
+    { id: 'inicio', label: t('navigation.home') },
+    { id: 'sobre-mi', label: t('navigation.about') },
+    { id: 'proyectos', label: t('navigation.projects') },
+    { id: 'contacto', label: t('navigation.contact') },
   ];
-  
-  const ids = navItems.map(item => item.id);
+
+  const ids = navItems.map((item) => item.id);
   const activeId = useScrollSpy(ids, 100);
   const scrollTo = useSmoothScroll();
 
@@ -60,12 +62,9 @@ export function Header() {
     window.localStorage.setItem('theme', nextMode ? 'dark' : 'light');
   };
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
-
   const handleNavClick = (id: string) => {
     scrollTo(id);
-    closeMenu();
+    setIsOpen(false);
   };
 
   if (!mounted) return null;
@@ -76,13 +75,10 @@ export function Header() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={`fixed w-full top-0 left-0 z-50 backdrop-blur-md transition-all duration-300 ${
-        scrolled 
-          ? 'bg-white/90 dark:bg-gray-900/90 shadow-lg' 
-          : 'bg-white/70 dark:bg-gray-900/70 shadow-sm'
+        scrolled ? 'bg-white/90 dark:bg-gray-900/90 shadow-lg' : 'bg-white/70 dark:bg-gray-900/70 shadow-sm'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-        {/* Logo */}
         <motion.a
           href="#inicio"
           onClick={(e) => {
@@ -92,19 +88,14 @@ export function Header() {
           className="text-xl font-bold flex items-center gap-2"
           whileHover={{ scale: 1.05 }}
         >
-          <span className="bg-primary text-white p-2 rounded-lg shadow-md dark:bg-dark-primary">
-            MP
-          </span>
-          <span className="text-primary dark:text-dark-primary font-bold">
-            MiPortafolio
-          </span>
+          <span className="bg-primary text-white p-2 rounded-lg shadow-md dark:bg-dark-primary">{t('brand.short')}</span>
+          <span className="text-primary dark:text-dark-primary font-bold">{t('brand.name')}</span>
         </motion.a>
 
-        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">
           <ul className="flex gap-2">
             {navItems.map((item, index) => (
-              <motion.li 
+              <motion.li
                 key={item.id}
                 initial={{ y: -10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -120,18 +111,17 @@ export function Header() {
                 >
                   <motion.span
                     className={`relative z-10 font-medium text-sm transition-colors ${
-                      activeId === item.id 
-                        ? 'text-primary-500 dark:text-dark-primary-500' 
+                      activeId === item.id
+                        ? 'text-primary-500 dark:text-dark-primary-500'
                         : 'text-gray-700 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-dark-primary-100'
                     }`}
                   >
                     {item.label}
                   </motion.span>
-                  
                   <motion.span
                     className={`absolute bottom-1 left-0 w-full h-0.5 ${
-                      activeId === item.id 
-                        ? 'bg-primary-500 dark:bg-dark-primary-500 scale-x-100' 
+                      activeId === item.id
+                        ? 'bg-primary-500 dark:bg-dark-primary-500 scale-x-100'
                         : 'bg-primary dark:bg-dark-primary scale-x-0'
                     }`}
                     initial={{ scaleX: 0 }}
@@ -144,15 +134,14 @@ export function Header() {
             ))}
           </ul>
 
-          {/* Theme Switcher */}
+          <LanguageToggle />
+
           <motion.button
             onClick={toggleTheme}
-            className="p-2 rounded-full bg-white dark:bg-gray-800 shadow hover:shadow-md transition-all
-                     border border-neutral-200 dark:border-gray-700 relative overflow-hidden
-                     group flex items-center justify-center"
+            className="p-2 rounded-full bg-white dark:bg-gray-800 shadow hover:shadow-md transition-all border border-neutral-200 dark:border-gray-700 relative overflow-hidden group flex items-center justify-center"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            aria-label="Cambiar tema"
+            aria-label={t('actions.themeToggle')}
           >
             <motion.span
               className="absolute inset-0 bg-primary dark:bg-dark-primary opacity-0 group-hover:opacity-10"
@@ -160,7 +149,6 @@ export function Header() {
               animate={{ opacity: darkMode ? 0.1 : 0 }}
               transition={{ duration: 0.3 }}
             />
-            
             <AnimatePresence mode="wait">
               <motion.div
                 key={darkMode ? 'dark' : 'light'}
@@ -169,33 +157,23 @@ export function Header() {
                 exit={{ rotate: 30, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                {darkMode ? (
-                  <SunIcon className="w-5 h-5 text-dark-primary-100" />
-                ) : (
-                  <MoonIcon className="w-5 h-5 text-primary" />
-                )}
+                {darkMode ? <SunIcon className="w-5 h-5 text-dark-primary-100" /> : <MoonIcon className="w-5 h-5 text-primary" />}
               </motion.div>
             </AnimatePresence>
           </motion.button>
         </nav>
 
-        {/* Mobile menu button */}
-        <div className="md:hidden flex items-center gap-4">
+        <div className="md:hidden flex items-center gap-3">
+          <LanguageToggle />
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full bg-white dark:bg-gray-800 shadow hover:shadow-md transition-all
-                     border border-neutral-200 dark:border-gray-700"
-            aria-label="Cambiar tema"
+            className="p-2 rounded-full bg-white dark:bg-gray-800 shadow hover:shadow-md transition-all border border-neutral-200 dark:border-gray-700"
+            aria-label={t('actions.themeToggle')}
           >
-            {darkMode ? (
-              <SunIcon className="w-5 h-5 text-dark-primary-100" />
-            ) : (
-              <MoonIcon className="w-5 h-5 text-primary" />
-            )}
+            {darkMode ? <SunIcon className="w-5 h-5 text-dark-primary-100" /> : <MoonIcon className="w-5 h-5 text-primary" />}
           </button>
-
           <motion.button
-            onClick={toggleMenu}
+            onClick={() => setIsOpen(!isOpen)}
             className="text-gray-700 dark:text-gray-300 focus:outline-none"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -205,7 +183,6 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile nav dropdown */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -217,12 +194,7 @@ export function Header() {
           >
             <ul className="px-6 pb-4 pt-2 space-y-3">
               {navItems.map((item) => (
-                <motion.li
-                  key={item.id}
-                  initial={{ x: 20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
+                <motion.li key={item.id} initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.3 }}>
                   <a
                     href={`#${item.id}`}
                     onClick={(e) => {
@@ -230,8 +202,8 @@ export function Header() {
                       handleNavClick(item.id);
                     }}
                     className={`block w-full py-2 px-3 rounded-lg transition-colors ${
-                      activeId === item.id 
-                        ? 'text-primary-500 dark:text-dark-primary-500 bg-primary-100 dark:bg-dark-primary-900' 
+                      activeId === item.id
+                        ? 'text-primary-500 dark:text-dark-primary-500 bg-primary-100 dark:bg-dark-primary-900'
                         : 'text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-dark-primary-900'
                     }`}
                   >

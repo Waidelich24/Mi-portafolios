@@ -1,7 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export const AboutImage = () => {
+  const { t } = useTranslation();
   return (
     <motion.div
       className="relative"
@@ -19,7 +21,7 @@ export const AboutImage = () => {
       >
         <img
           src="/Perfilimage.png"
-          alt="Foto de perfil"
+          alt={t("about.profileAlt")}
           className="w-full h-auto object-cover transition-transform duration-700 hover:scale-105"
         />
       </motion.div>
@@ -32,9 +34,7 @@ export const AboutImage = () => {
         viewport={{ once: true }}
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
         whileHover={{ scale: 1.1, rotate: 5 }}
-      >
-        3+ años
-      </motion.div>
+      >{t("about.floatingBadge")}</motion.div>
     </motion.div>
   );
 };

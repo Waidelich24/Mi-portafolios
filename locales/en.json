@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "title": "My Portfolio",
+    "description": "Fullstack Developer"
+  },
+  "brand": {
+    "name": "MyPortfolio",
+    "short": "MP",
+    "author": "Angel Waidelich"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About me",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "actions": {
+    "themeToggle": "Toggle theme",
+    "languageToggle": "Change language",
+    "downloadCv": "Download CV",
+    "visitSite": "Visit Site",
+    "seeProject": "View Project",
+    "contactNow": "Contact now",
+    "sendMessage": "Send message",
+    "sending": "Sending..."
+  },
+  "hero": {
+    "role": "Software Developer",
+    "description": "Professional with 3 years of experience in software development, specialized in web and desktop applications. I work with technologies such as",
+    "stack": "React, Tailwind, Python, C#, Node.js and SQL",
+    "descriptionEnd": "and I keep a versatile, results-oriented mindset.",
+    "cta": "See my projects",
+    "bulletPoints": [
+      "Experience delivering Full Stack solutions",
+      "Knowledge in mobile development",
+      "Actively looking for new opportunities"
+    ],
+    "imageAlt": "Angel Waidelich"
+  },
+  "about": {
+    "title": "About Me",
+    "badge": "Full Stack Developer",
+    "headline": "Focused on building scalable products",
+    "description": "Specialized in creating innovative digital solutions with React, Node.js, and scalable architectures. Over 3 years transforming ideas into functional products with a focus on user experience, performance, and sustainable technical decisions.",
+    "profileAlt": "Profile photo",
+    "floatingBadge": "3+ years",
+    "metrics": [
+      { "value": "+3", "label": "years developing" },
+      { "value": "3", "label": "real-world deployed projects" },
+      { "value": "7+", "label": "technologies mastered" }
+    ],
+    "roadmap": {
+      "title": "My Professional Evolution",
+      "items": [
+        {
+          "year": "2023",
+          "focus": "Programming Fundamentals",
+          "detail": "Started with Python, data structures, and logical problem-solving."
+        },
+        {
+          "year": "2024",
+          "focus": "Application Development",
+          "detail": "Built applications with C#, SQL databases, and first real product-oriented projects."
+        },
+        {
+          "year": "2025",
+          "focus": "Full Stack & Architecture",
+          "detail": "Specialized in React, Node.js, Tailwind, and modern scalable architecture design."
+        }
+      ]
+    }
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "clientLabel": "Client:",
+    "descriptionLabel": "Description",
+    "featuresLabel": "Features",
+    "technologiesLabel": "Technologies",
+    "galleryLabel": "Gallery",
+    "screenshot": "Screenshot",
+    "imageLoadError": "Failed to load",
+    "imageLoadErrorDetailed": "Failed to load image",
+    "items": [
+      {
+        "id": "1",
+        "title": "Library Management System",
+        "client": "Montecarlo Public Library, Misiones",
+        "year": 2023,
+        "description": "Comprehensive system for managing loans, inventory, and municipal library users. It enables full control of book flow, loan registration, and statistical reporting.",
+        "features": [
+          "Complete CRUD for books and users",
+          "Loan system with due dates",
+          "Automatic late-fee calculation",
+          "PDF report generation",
+          "Advanced search with multiple filters"
+        ],
+        "technologies": ["Python", "SQL (SQLite)", "Tkinter", "ReportLab (PDF)"],
+        "thumbnail": "/images/projects/biblioteca/thumb.jpg",
+        "images": ["/images/projects/biblioteca/1.png", "/images/projects/biblioteca/2.png"]
+      },
+      {
+        "id": "2",
+        "title": "Institutional Website",
+        "client": "ISIPP 1206",
+        "year": 2024,
+        "description": "Modern informational platform for the educational institute, showcasing its academic offering, facilities, and admission process. Designed for accessibility and top mobile performance.",
+        "features": [
+          "Interactive academic programs showcase",
+          "Facilities gallery",
+          "Integrated contact form",
+          "News blog",
+          "Mobile-first responsive design"
+        ],
+        "technologies": ["React", "TypeScript", "Node.js", "Tailwind CSS"],
+        "thumbnail": "/images/projects/isipp/thumb.jpg",
+        "images": ["/images/projects/isipp/1.png", "/images/projects/isipp/2.png"],
+        "link": "https://isippweb.vercel.app"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Do you have a project in mind or want to work together? Send me a message and I'll get back to you as soon as possible.",
+    "infoTitle": "Contact information",
+    "socialTitle": "Social networks",
+    "fields": {
+      "name": "Name",
+      "namePlaceholder": "Your full name",
+      "email": "Email",
+      "emailPlaceholder": "you@email.com",
+      "message": "Message",
+      "messagePlaceholder": "Tell me about your project..."
+    },
+    "status": {
+      "captcha": "⚠️ Please verify you are not a robot.",
+      "success": "✓ Message sent successfully!",
+      "error": "✗ Failed to send. Please try again."
+    },
+    "items": {
+      "email": "Email",
+      "location": "Location",
+      "phone": "Phone",
+      "locationValue": "Montecarlo, Misiones, Argentina"
+    }
+  },
+  "footer": {
+    "description": "Full Stack developer passionate about building innovative digital solutions.",
+    "navTitle": "Navigation",
+    "contactTitle": "Contact",
+    "projectTitle": "Do you have a project?",
+    "projectDescription": "Let's talk about how I can help you make it real.",
+    "avatarAlt": "Angel Waidelich avatar",
+    "copyright": "All rights reserved."
+  }
+}

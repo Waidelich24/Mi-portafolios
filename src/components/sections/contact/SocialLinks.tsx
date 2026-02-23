@@ -1,5 +1,6 @@
 import { FaGithub, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface SocialLink {
   icon: React.ReactNode;
@@ -8,15 +9,17 @@ interface SocialLink {
 }
 
 export const SocialLinks = () => {
+  const { t } = useTranslation();
+
   const socialLinks: SocialLink[] = [
     { icon: <FaGithub />, href: "https://github.com/Waidelich24", label: "GitHub" },
     { icon: <FaLinkedinIn />, href: "https://www.linkedin.com/in/angel-waidelich-579270326/", label: "LinkedIn" },
-    { icon: <FaInstagram />, href: "https://www.instagram.com/angel_waidelich25/", label: "Instagram" }
+    { icon: <FaInstagram />, href: "https://www.instagram.com/angel_waidelich25/", label: "Instagram" },
   ];
 
   return (
     <div>
-      <h3 className="text-xl font-semibold dark:text-white mb-4">Redes sociales</h3>
+      <h3 className="text-xl font-semibold dark:text-white mb-4">{t('contact.socialTitle')}</h3>
       <div className="flex gap-4">
         {socialLinks.map((social, index) => (
           <motion.a

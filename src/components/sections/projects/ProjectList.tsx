@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import type { Project } from "@/data/projectsData";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface ProjectListProps {
   projects: Project[];
   selectedProject: number;
   setSelectedProject: (index: number) => void;
-  openImageAtIndex: (index: number) => void; // Solo esta prop para abrir imágenes
+  openImageAtIndex: (index: number) => void;
   setImageLoadError: (msg: string | null) => void;
 }
 
@@ -22,28 +23,16 @@ const itemVariants = {
   }),
 };
 
-export default function ProjectList({
-  projects,
-  selectedProject,
-  setSelectedProject,
-  openImageAtIndex,
-  setImageLoadError,
-}: ProjectListProps) {
-
-  const handleImageClick = (e: React.MouseEvent, index: number) => {
-    e.stopPropagation();
-    openImageAtIndex(index);
-    setImageLoadError(null);
-  };
+export default function ProjectList({ projects, selectedProject, setSelectedProject, openImageAtIndex, setImageLoadError }: ProjectListProps) {
+  const { t } = useTranslation();
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    setImageLoadError(`Error al cargar: ${(e.target as HTMLImageElement).src}`);
-    console.error("Error loading image:", e);
+    setImageLoadError(`${t('projects.imageLoadError')}: ${(e.target as HTMLImageElement).src}`);
   };
 
   return (
     <div className="md:w-1/3 p-4 space-y-2 overflow-y-auto max-h-[600px] custom-scrollbar">
-      <h3 className="text-xl font-bold mb-4 dark:text-white pl-2">Proyectos Destacados</h3>
+      <h3 className="text-xl font-bold mb-4 dark:text-white pl-2">{t('projects.title')}</h3>
 
       {projects.map((project, index) => (
         <motion.div
@@ -55,23 +44,15 @@ export default function ProjectList({
           whileHover={{ scale: 1.02 }}
           onClick={() => setSelectedProject(index)}
           className={`p-3 rounded-lg cursor-pointer transition-all flex items-center gap-3 ${
-            selectedProject === index
-              ? "border-l-4 border-[#800020] bg-[#800020]/20 dark:bg-[#8B0000]/30"
-              : "hover:bg-gray-100/50 dark:hover:bg-gray-700/50"
+            selectedProject === index ? "border-l-4 border-[#800020] bg-[#800020]/20 dark:bg-[#8B0000]/30" : "hover:bg-gray-100/50 dark:hover:bg-gray-700/50"
           }`}
         >
-          <div
-            className="relative w-10 h-10 rounded overflow-hidden"
-            onClick={(e) => handleImageClick(e, index)}
-          >
-            <Image
-              src={project.thumbnail}
-              alt={project.title}
-              fill
-              className="object-cover"
-              sizes="40px"
-              onError={handleImageError}
-            />
+          <div className="relative w-10 h-10 rounded overflow-hidden" onClick={(e) => {
+            e.stopPropagation();
+            openImageAtIndex(index);
+            setImageLoadError(null);
+          }}>
+            <Image src={project.thumbnail} alt={project.title} fill className="object-cover" sizes="40px" onError={handleImageError} />
           </div>
 
           <div className="flex-1 min-w-0">
@@ -80,11 +61,7 @@ export default function ProjectList({
           </div>
 
           {selectedProject === index && (
-            <motion.span
-              className="text-primary"
-              animate={{ x: [0, 5, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5 }}
-            >
+            <motion.span className="text-primary" animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
               →
             </motion.span>
           )}

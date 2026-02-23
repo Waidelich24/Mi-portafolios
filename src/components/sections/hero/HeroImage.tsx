@@ -1,10 +1,11 @@
 "use client";
 import { motion, useMotionTemplate, useMotionValue, animate } from "framer-motion";
 import { useEffect } from "react";
-
+import { useTranslation } from "@/hooks/useTranslation";
 export default function HeroImage() {
   // Valores para efectos de movimiento
   const rotateX = useMotionValue(0);
+  const { t } = useTranslation();
   const rotateY = useMotionValue(0);
   const scale = useMotionValue(1);
   const borderRadius = useMotionValue(9999);
@@ -92,8 +93,8 @@ export default function HeroImage() {
         {/* Imagen principal con efectos controlados */}
         <motion.img 
           src="/Perfilimage.png" 
-          alt="Angel Waidelich"
-          className="w-full h-full object-cover"
+          alt={t("hero.imageAlt")}
+                    className="w-full h-full object-cover"
           style={{
             filter: imageFilter,
             transform: useMotionTemplate`scale(${scale})`,

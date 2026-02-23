@@ -1,13 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
-
-const bulletPoints = [
-  "Experiencia en soluciones Full Stack",
-  "Conocimiento en desarrollo móvil",
-  "En búsqueda activa de nuevas oportunidades"
-];
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function HeroBulletPoints() {
+  const { tRaw } = useTranslation();
+  const bulletPoints = tRaw<string[]>('hero.bulletPoints');
+
   return (
     <div className="space-y-4 mb-8">
       {bulletPoints.map((point, index) => (
